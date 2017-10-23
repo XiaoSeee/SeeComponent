@@ -4,7 +4,6 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/MVPLibrary/MVPLibrary.iml" filepath="$PROJECT_DIR$/MVPLibrary/MVPLibrary.iml" />
       <module fileurl="file://$PROJECT_DIR$/SeeComponent.iml" filepath="$PROJECT_DIR$/SeeComponent.iml" />
-      <module fileurl="file://$PROJECT_DIR$/SeeComponent.iml" filepath="$PROJECT_DIR$/SeeComponent.iml" />
       <module fileurl="file://$PROJECT_DIR$/TestApp/TestApp.iml" filepath="$PROJECT_DIR$/TestApp/TestApp.iml" />
     </modules>
   </component>
