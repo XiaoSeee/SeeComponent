@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.see.mvp.R;
+import com.see.mvp.reflect.TypeToken;
 
 
 /**
@@ -20,6 +21,8 @@ import com.see.mvp.R;
  */
 public abstract class BaseActivity<PresenterType extends Presenter> extends AppCompatActivity
         implements View.OnClickListener {
+    //final TypeToken<PresenterType> type =  TypeToken.get(PresenterType);
+    //TypeToken<T> type = new TypeToken<T>(getClass()) {};
     private ViewHelper<PresenterType> helper = new ViewHelper<>(this);
     protected Context mContext;
     /**
@@ -39,7 +42,12 @@ public abstract class BaseActivity<PresenterType extends Presenter> extends AppC
         setContentView(getContentView());
         initToolbar();
         initView(savedInstanceState);
+        createPresenter();
         helper.onCreate(savedInstanceState);
+    }
+
+    private void createPresenter() {
+
     }
 
     /**
@@ -50,16 +58,23 @@ public abstract class BaseActivity<PresenterType extends Presenter> extends AppC
     protected abstract int getContentView();
 
     /**
-     * 用于初始化各种布局
+     * 开始初始化各种布局
      *
      * @param savedInstanceState 异常恢复保存的信息
      */
     protected abstract void initView(Bundle savedInstanceState);
 
+    /**
+     * 开始加载数据
+     */
+    protected void loadData() {
+        helper.onPostCreate();
+    }
+
     @Override
     public void onPostCreate(Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
-        helper.onPostCreate();
+        loadData();
     }
 
     @Override
@@ -142,17 +157,7 @@ public abstract class BaseActivity<PresenterType extends Presenter> extends AppC
     }
 
     @Nullable
-    protected final <E extends View> E viewId(@NonNull View view, @IdRes int id) {
-        return (E) view.findViewById(id);
-    }
-
-    @Nullable
     protected final <E extends View> E $(@IdRes int id) {
-        return (E) findViewById(id);
-    }
-
-    @Nullable
-    protected final <E extends View> E viewId(@IdRes int id) {
         return (E) findViewById(id);
     }
 }

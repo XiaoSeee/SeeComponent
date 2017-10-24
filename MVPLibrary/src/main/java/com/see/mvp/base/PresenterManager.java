@@ -60,17 +60,13 @@ public class PresenterManager {
         return nextId++ + "/" + System.nanoTime() + "/" + (int) (Math.random() * Integer.MAX_VALUE);
     }
 
-    public static <PresenterType extends Presenter> PresenterType fromViewClass(Class<?> viewClass) {
+    public <T extends Presenter> T fromViewClass(Class<?> viewClass) {
         RequiresPresenter annotation = viewClass.getAnnotation(RequiresPresenter.class);
-        //noinspection unchecked
         if (annotation == null) {
             return null;
-            //throw new RuntimeException("You must declaration @RequiresPresenter for your Activity");
         }
-
-        Class<PresenterType> presenterClass = (Class<PresenterType>) annotation.value();
-
-        PresenterType presenter;
+        Class<T> presenterClass = (Class<T>) annotation.value();
+        T presenter;
         try {
             presenter = presenterClass.newInstance();
         } catch (InstantiationException e) {
