@@ -8,6 +8,7 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/AdapterHelper" />
             <option value="$PROJECT_DIR$/MVPLibrary" />
             <option value="$PROJECT_DIR$/Matisse" />
             <option value="$PROJECT_DIR$/TestApp" />
