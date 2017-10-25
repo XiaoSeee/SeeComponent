@@ -13,16 +13,13 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.see.mvp.R;
-import com.see.mvp.reflect.TypeToken;
 
 
 /**
- * @author WuXiang
+ * @author by WuXiang on 2017/10/25.
  */
 public abstract class BaseActivity<PresenterType extends Presenter> extends AppCompatActivity
         implements View.OnClickListener {
-    //final TypeToken<PresenterType> type =  TypeToken.get(PresenterType);
-    //TypeToken<T> type = new TypeToken<T>(getClass()) {};
     private ViewHelper<PresenterType> helper = new ViewHelper<>(this);
     protected Context mContext;
     /**
@@ -42,12 +39,7 @@ public abstract class BaseActivity<PresenterType extends Presenter> extends AppC
         setContentView(getContentView());
         initToolbar();
         initView(savedInstanceState);
-        createPresenter();
-        helper.onCreate(savedInstanceState);
-    }
-
-    private void createPresenter() {
-
+        helper.onCreate(savedInstanceState, getClass().getGenericSuperclass());
     }
 
     /**
@@ -134,6 +126,13 @@ public abstract class BaseActivity<PresenterType extends Presenter> extends AppC
                     onBackPressed();
                 }
             });
+        }
+    }
+
+    public void hideHomeAsUp() {
+        ActionBar mActionBar = getSupportActionBar();
+        if (null != mActionBar) {
+            mActionBar.setDisplayHomeAsUpEnabled(false);
         }
     }
 

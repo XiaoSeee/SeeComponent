@@ -20,7 +20,7 @@ import com.see.mvp.R;
  * You can inherit from this class or copy/paste this class's code to
  * create your own view implementation.
  *
- * @author WuXiang
+ * @author by WuXiang on 2017/10/25.
  */
 public abstract class BaseFragment<PresenterType extends Presenter> extends Fragment {
     private ViewHelper<PresenterType> helper = new ViewHelper<>(this);
@@ -61,7 +61,7 @@ public abstract class BaseFragment<PresenterType extends Presenter> extends Frag
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        helper.onCreate(savedInstanceState);
+        helper.onCreate(savedInstanceState, getClass().getGenericSuperclass());
     }
 
     @Nullable

@@ -1,17 +1,18 @@
 package com.see.mvp.base;
 
+import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Type;
 import java.util.HashMap;
 
 
 /**
- * @author WuXiang
+ * @author by WuXiang on 2017/10/25.
  */
 public class PresenterManager {
     private static volatile PresenterManager instance;
 
     /**
-     * 使用id当索引保持所有presenter引用
-     * <p>
+     * 使用id当索引保持所有presenter引用。
      * 虽然view与presenter是一一对应关系，但避免保持View引。
      */
     private HashMap<String, Presenter> idToPresenter = new HashMap<>();
@@ -31,8 +32,8 @@ public class PresenterManager {
         return instance;
     }
 
-    public <T extends Presenter> T create(Object view) {
-        T presenter = fromViewClass(view.getClass());
+    public <T extends Presenter> T create(Type type) {
+        T presenter = fromType(type);
         if (presenter == null) {
             return null;
         }
@@ -50,22 +51,26 @@ public class PresenterManager {
         idToPresenter.remove(id);
     }
 
-
     /**
      * 最大程度保持线程安全。
-     * <p>
      * 虽然主线程是非常安全的。
      */
     private String providePresenterId() {
         return nextId++ + "/" + System.nanoTime() + "/" + (int) (Math.random() * Integer.MAX_VALUE);
     }
 
-    public <T extends Presenter> T fromViewClass(Class<?> viewClass) {
-        RequiresPresenter annotation = viewClass.getAnnotation(RequiresPresenter.class);
-        if (annotation == null) {
+    private <T extends Presenter> T fromType(Type type) {
+        //获取 Type 失败
+        if (type == null) {
             return null;
         }
-        Class<T> presenterClass = (Class<T>) annotation.value();
+
+        //没有指定 Presenter
+        if (!(type instanceof ParameterizedType)) {
+            return null;
+        }
+
+        Class<T> presenterClass = (Class<T>) ((ParameterizedType) type).getActualTypeArguments()[0];
         T presenter;
         try {
             presenter = presenterClass.newInstance();

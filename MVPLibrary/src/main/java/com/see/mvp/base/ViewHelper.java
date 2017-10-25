@@ -3,8 +3,12 @@ package com.see.mvp.base;
 import android.content.Intent;
 import android.os.Bundle;
 
+import java.lang.reflect.Type;
+
 /**
  * A helper class to control presenter's lifecycle.
+ *
+ * @author by WuXiang on 2017/10/25.
  */
 class ViewHelper<PresenterType extends Presenter> {
     public static final String PRESENTER_ID = "presenter_id";
@@ -22,21 +26,20 @@ class ViewHelper<PresenterType extends Presenter> {
         this.view = view;
     }
 
-
-    void onCreate(Bundle savedInstanceState) {
+    void onCreate(Bundle savedInstanceState, Type type) {
         String id;
         if (savedInstanceState == null || (id = savedInstanceState.getString(PRESENTER_ID)) == null) {
-            createPresenter(savedInstanceState);
+            createPresenter(savedInstanceState, type);
         } else {
             presenter = PresenterManager.getInstance().get(id);
             if (presenter == null) {
-                createPresenter(savedInstanceState);
+                createPresenter(savedInstanceState, type);
             }
         }
     }
 
-    private void createPresenter(Bundle savedInstanceState) {
-        presenter = PresenterManager.getInstance().create(view);
+    private void createPresenter(Bundle savedInstanceState, Type type) {
+        presenter = PresenterManager.getInstance().create(type);
         hasPresenter = presenter != null;
         if (hasPresenter) {
             presenter.create(view, savedInstanceState);

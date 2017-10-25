@@ -6,14 +6,11 @@ import android.widget.TextView;
 import com.see.mvp.base.BaseActivity;
 import com.see.mvp.base.Presenter;
 
-import java.util.List;
-
 /**
  * @author WuXiang
  */
-public class MainActivity extends BaseActivity<MainPresenter> {
+public class MainActivity<T extends Presenter> extends BaseActivity<T> {
     TextView textView;
-
 
     @Override
     protected int getContentView() {

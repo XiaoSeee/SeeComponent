@@ -5,7 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 
 /**
- * @author WuXiang
+ * @author by WuXiang on 2017/10/25.
  */
 public class Presenter<ViewType> {
     String id;
