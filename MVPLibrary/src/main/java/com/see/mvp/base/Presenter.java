@@ -1,8 +1,10 @@
 package com.see.mvp.base;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v4.app.Fragment;
 
 /**
  * @author by WuXiang on 2017/10/25.
@@ -10,6 +12,18 @@ import android.support.annotation.NonNull;
 public class Presenter<ViewType> {
     String id;
     ViewType view;
+
+    protected Intent getIntent() {
+        Activity activity;
+        if (getView() instanceof Activity) {
+            activity = (Activity) getView();
+        } else if (getView() instanceof Fragment) {
+            activity = ((Fragment) getView()).getActivity();
+        } else {
+            throw new RuntimeException("No View Found" + getView().getClass().getName());
+        }
+        return activity != null ? activity.getIntent() : null;
+    }
 
     @NonNull
     public final ViewType getView() {

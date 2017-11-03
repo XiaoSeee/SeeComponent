@@ -16,13 +16,10 @@ import android.widget.TextView;
 import com.see.mvp.R;
 
 /**
- * This view is an example of how a view should control it's presenter.
- * You can inherit from this class or copy/paste this class's code to
- * create your own view implementation.
- *
  * @author by WuXiang on 2017/10/25.
  */
-public abstract class BaseFragment<PresenterType extends Presenter> extends Fragment {
+public abstract class BaseFragment<PresenterType extends Presenter> extends Fragment
+        implements View.OnClickListener {
     private ViewHelper<PresenterType> helper = new ViewHelper<>(this);
     protected Context mContext;
     protected View mRootView;
@@ -66,7 +63,7 @@ public abstract class BaseFragment<PresenterType extends Presenter> extends Frag
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         mRootView = inflater.inflate(getContentView(), container, false);
         initView(savedInstanceState);
         initToolbar();
@@ -170,6 +167,11 @@ public abstract class BaseFragment<PresenterType extends Presenter> extends Frag
 
     protected final <E extends View> E $(@IdRes int id) {
         return (E) mRootView.findViewById(id);
+    }
+
+    @Override
+    public void onClick(View view) {
+
     }
 
     public interface OnCallListener {
