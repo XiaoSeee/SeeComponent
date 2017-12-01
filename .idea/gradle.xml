@@ -12,6 +12,7 @@
             <option value="$PROJECT_DIR$/MVPLibrary" />
             <option value="$PROJECT_DIR$/Matisse" />
             <option value="$PROJECT_DIR$/TestApp" />
+            <option value="$PROJECT_DIR$/UtilLibrary" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />
