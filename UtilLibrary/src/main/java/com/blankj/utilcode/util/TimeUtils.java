@@ -1,5 +1,7 @@
 package com.blankj.utilcode.util;
 
+import android.text.TextUtils;
+
 import com.blankj.utilcode.constant.TimeConstants;
 
 import java.text.DateFormat;
@@ -7,6 +9,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.Locale;
 
 /**
@@ -1533,8 +1536,8 @@ public final class TimeUtils {
         return CHINESE_ZODIAC[year % 12];
     }
 
-    private static final String[] ZODIAC       = {"水瓶座", "双鱼座", "白羊座", "金牛座", "双子座", "巨蟹座", "狮子座", "处女座", "天秤座", "天蝎座", "射手座", "魔羯座"};
-    private static final int[]    ZODIAC_FLAGS = {20, 19, 21, 21, 21, 22, 23, 23, 23, 24, 23, 22};
+    private static final String[] ZODIAC = {"水瓶座", "双鱼座", "白羊座", "金牛座", "双子座", "巨蟹座", "狮子座", "处女座", "天秤座", "天蝎座", "射手座", "魔羯座"};
+    private static final int[] ZODIAC_FLAGS = {20, 19, 21, 21, 21, 22, 23, 23, 23, 24, 23, 22};
 
     /**
      * 获取星座
@@ -1619,5 +1622,61 @@ public final class TimeUtils {
             }
         }
         return sb.toString();
+    }
+
+    /**
+     * @param birthday 格式必须为：YYYYMMDD
+     * @return Age from the current date
+     */
+    public static int getAgeByBirthday(String birthday) {
+        if (TextUtils.isEmpty(birthday) || birthday.equals("null")) {
+            return 0;
+        }
+
+        SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd", Locale.getDefault());
+        Date dateTime = null;
+        try {
+            dateTime = format.parse(birthday);
+        } catch (Exception ignored) {
+        }
+
+        return getAge(dateTime);
+    }
+
+    /**
+     * @param birthday 生日
+     * @return Age from the current date
+     */
+    public static int getAge(Date birthday) {
+        return getAge(Calendar.getInstance().getTime(), birthday);
+    }
+
+    /**
+     * Calculating age from a current date
+     *
+     * @param current  当前时间
+     * @param birthday 生日
+     * @return Age from the current (arg) date
+     */
+    public static int getAge(final Date current, final Date birthday) {
+        if (birthday == null) {
+            return 0;
+        }
+        if (current == null) {
+            return getAge(birthday);
+        } else {
+            final Calendar calendar = new GregorianCalendar();
+            calendar.set(Calendar.HOUR_OF_DAY, 0);
+            calendar.set(Calendar.MINUTE, 0);
+            calendar.set(Calendar.SECOND, 0);
+            calendar.set(Calendar.MILLISECOND, 0);
+
+            calendar.setTimeInMillis(current.getTime() - birthday.getTime());
+
+            float result;
+            result = calendar.get(Calendar.YEAR) - 1970;
+            result += (float) calendar.get(Calendar.MONTH) / (float) 12;
+            return (int) result;
+        }
     }
 }
