@@ -67,6 +67,7 @@ public abstract class BaseFragment<PresenterType extends Presenter> extends Frag
         mRootView = inflater.inflate(getContentView(), container, false);
         initView(savedInstanceState);
         initToolbar();
+        mIsLoaded = false;
         mIsPrepared = true;
         loadData();
         return mRootView;
