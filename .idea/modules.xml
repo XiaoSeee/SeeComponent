@@ -4,7 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/MVPLibrary/MVPLibrary.iml" filepath="$PROJECT_DIR$/MVPLibrary/MVPLibrary.iml" />
       <module fileurl="file://$PROJECT_DIR$/Matisse/Matisse.iml" filepath="$PROJECT_DIR$/Matisse/Matisse.iml" />
-      <module fileurl="file://$PROJECT_DIR$/RecyclerHelper/AdapterHelper.iml" filepath="$PROJECT_DIR$/RecyclerHelper/AdapterHelper.iml" />
+      <module fileurl="file://$PROJECT_DIR$/RecyclerHelper/RecyclerHelper.iml" filepath="$PROJECT_DIR$/RecyclerHelper/RecyclerHelper.iml" />
       <module fileurl="file://$PROJECT_DIR$/SeeComponent.iml" filepath="$PROJECT_DIR$/SeeComponent.iml" />
       <module fileurl="file://$PROJECT_DIR$/TestApp/TestApp.iml" filepath="$PROJECT_DIR$/TestApp/TestApp.iml" />
       <module fileurl="file://$PROJECT_DIR$/UtilLibrary/UtilLibrary.iml" filepath="$PROJECT_DIR$/UtilLibrary/UtilLibrary.iml" />
