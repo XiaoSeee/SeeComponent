@@ -2,6 +2,7 @@ package com.blankj.utilcode.util;
 
 import android.text.TextUtils;
 
+import com.blankj.utilcode.R;
 import com.blankj.utilcode.constant.TimeConstants;
 
 import java.text.DateFormat;
@@ -736,18 +737,18 @@ public final class TimeUtils {
         if (span < 0)
             return String.format("%tc", millis);// U can read http://www.apihome.cn/api/java/Formatter.html to understand it.
         if (span < 1000) {
-            return "刚刚";
+            return Utils.getApp().getString(R.string.just_now);
         } else if (span < TimeConstants.MIN) {
-            return String.format(Locale.getDefault(), "%d秒前", span / TimeConstants.SEC);
+            return Utils.getApp().getString(R.string.seconds_ago, span / TimeConstants.SEC);
         } else if (span < TimeConstants.HOUR) {
-            return String.format(Locale.getDefault(), "%d分钟前", span / TimeConstants.MIN);
+            return Utils.getApp().getString(R.string.minutes_ago, span / TimeConstants.MIN);
         }
         // 获取当天 00:00
         long wee = getWeeOfToday();
         if (millis >= wee) {
-            return String.format("今天%tR", millis);
+            return Utils.getApp().getString(R.string.today, millis);
         } else if (millis >= wee - TimeConstants.DAY) {
-            return String.format("昨天%tR", millis);
+            return Utils.getApp().getString(R.string.yesterday, millis);
         } else {
             return String.format("%tF", millis);
         }
