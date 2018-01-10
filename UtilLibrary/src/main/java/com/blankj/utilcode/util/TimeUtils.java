@@ -1626,7 +1626,7 @@ public final class TimeUtils {
     }
 
     /**
-     * @param birthday 格式必须为：YYYYMMDD
+     * @param birthday 格式必须为：yyyyMMdd
      * @return Age from the current date
      */
     public static int getAgeByBirthday(String birthday) {
