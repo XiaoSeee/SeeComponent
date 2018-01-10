@@ -3,13 +3,13 @@ package com.see.component;
 import android.os.Bundle;
 import android.widget.TextView;
 
-import com.see.mvp.base.BaseActivity;
 import com.see.mvp.base.Presenter;
+import com.see.mvp.base.SeeBaseActivity;
 
 /**
  * @author WuXiang
  */
-public class MainActivity<T extends Presenter> extends BaseActivity<T> {
+public class MainActivity<T extends Presenter> extends SeeBaseActivity<T> {
     TextView textView;
 
     @Override

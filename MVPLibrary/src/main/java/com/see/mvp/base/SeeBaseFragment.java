@@ -18,7 +18,7 @@ import com.see.mvp.R;
 /**
  * @author by WuXiang on 2017/10/25.
  */
-public abstract class BaseFragment<PresenterType extends Presenter> extends Fragment
+public abstract class SeeBaseFragment<PresenterType extends Presenter> extends Fragment
         implements View.OnClickListener {
     private ViewHelper<PresenterType> helper = new ViewHelper<>(this);
     protected Context mContext;

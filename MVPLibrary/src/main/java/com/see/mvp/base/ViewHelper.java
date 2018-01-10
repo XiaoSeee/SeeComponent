@@ -50,10 +50,10 @@ class ViewHelper<PresenterType extends Presenter> {
         if (presenter == null) {
             if (hasPresenter) {
                 //能执行到这里就是见鬼了。表示View所对应的Presenter莫名其妙消失了。单独的View存在是很容易空指针的，所以直接重建最好。
-                if (view instanceof BaseActivity) {
-                    ((BaseActivity) view).recreate();
-                } else if (view instanceof BaseFragment) {
-                    ((BaseFragment) view).getActivity().recreate();
+                if (view instanceof SeeBaseActivity) {
+                    ((SeeBaseActivity) view).recreate();
+                } else if (view instanceof SeeBaseFragment) {
+                    ((SeeBaseFragment) view).getActivity().recreate();
                 }
             }
             return false;

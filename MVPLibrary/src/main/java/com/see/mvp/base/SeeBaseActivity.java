@@ -18,7 +18,7 @@ import com.see.mvp.R;
 /**
  * @author by WuXiang on 2017/10/25.
  */
-public abstract class BaseActivity<PresenterType extends Presenter> extends AppCompatActivity
+public abstract class SeeBaseActivity<PresenterType extends Presenter> extends AppCompatActivity
         implements View.OnClickListener {
     private ViewHelper<PresenterType> helper = new ViewHelper<>(this);
     protected Context mContext;
