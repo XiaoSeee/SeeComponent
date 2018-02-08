@@ -65,10 +65,10 @@ public abstract class SeeBaseFragment<PresenterType extends Presenter> extends F
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         mRootView = inflater.inflate(getContentView(), container, false);
-        initView(savedInstanceState);
-        initToolbar();
         mIsLoaded = false;
         mIsPrepared = true;
+        initToolbar();
+        initView(savedInstanceState);
         loadData();
         return mRootView;
     }
