@@ -22,7 +22,7 @@ android {
 }
 
 dependencies {
-    compile fileTree(include: ['*.jar'], dir: 'libs')
-    compile project(':MVPLibrary')
-    compile "com.android.support:appcompat-v7:$supportVersion"
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation project(':MVPLibrary')
+    implementation "com.android.support:appcompat-v7:$supportVersion"
 }
