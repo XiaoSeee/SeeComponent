@@ -162,6 +162,12 @@ public abstract class SeeBaseFragment<PresenterType extends Presenter> extends F
         this.setTitle(getText(titleId));
     }
 
+    public void callOnActivity(int what, Object obj) {
+        if (mCallListener != null) {
+            mCallListener.callOnActivity(what, obj);
+        }
+    }
+
     protected final <E extends View> E $(@NonNull View view, @IdRes int id) {
         return (E) view.findViewById(id);
     }
