@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
+import android.support.annotation.MenuRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -20,6 +21,8 @@ import com.see.mvp.R;
  */
 public abstract class SeeBaseFragment<PresenterType extends Presenter> extends Fragment
         implements View.OnClickListener {
+    public static final int SET_TITLE = 18000;//设置标题
+
     private ViewHelper<PresenterType> helper = new ViewHelper<>(this);
     protected Context mContext;
     protected View mRootView;
@@ -154,7 +157,7 @@ public abstract class SeeBaseFragment<PresenterType extends Presenter> extends F
         if (mTitle != null) {
             mTitle.setText(title);
         } else {
-            getActivity().setTitle(title);
+            callOnActivity(SET_TITLE, title);
         }
     }
 
@@ -162,7 +165,14 @@ public abstract class SeeBaseFragment<PresenterType extends Presenter> extends F
         this.setTitle(getText(titleId));
     }
 
-    public void callOnActivity(int what, Object obj) {
+    public void addToolbarMenu(@MenuRes int resId, Toolbar.OnMenuItemClickListener listener) {
+        if (mToolbar != null) {
+            mToolbar.inflateMenu(resId);
+            mToolbar.setOnMenuItemClickListener(listener);
+        }
+    }
+
+    public void callOnActivity(int what, Object... obj) {
         if (mCallListener != null) {
             mCallListener.callOnActivity(what, obj);
         }
@@ -182,6 +192,6 @@ public abstract class SeeBaseFragment<PresenterType extends Presenter> extends F
     }
 
     public interface OnCallListener {
-        void callOnActivity(int what, Object obj);
+        void callOnActivity(int what, Object... obj);
     }
 }
