@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <string name="just_now">刚刚</string>
-    <string name="seconds_ago">%d秒前</string>
-    <string name="minutes_ago">%d分钟前</string>
-    <string name="today">今天%tR</string>
-    <string name="yesterday">昨天%tR</string>
-</resources>
