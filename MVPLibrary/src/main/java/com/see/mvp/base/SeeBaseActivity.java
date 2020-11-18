@@ -3,12 +3,12 @@ package com.see.mvp.base;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.IdRes;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
+import androidx.annotation.IdRes;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import android.view.View;
 import android.widget.TextView;
 
@@ -102,8 +102,23 @@ public abstract class SeeBaseActivity<PresenterType extends Presenter> extends A
         helper.onResult(requestCode, resultCode, data);
     }
 
+    //第二次点击按钮的点击间隔不能少于400毫秒
+    private static final int MIN_CLICK_DELAY_TIME = 400;
+    private long lastClickTime;
+
     @Override
-    public void onClick(View v) {
+    public void onClick(View view) {
+        long curClickTime = System.currentTimeMillis();
+        if ((curClickTime - lastClickTime) >= MIN_CLICK_DELAY_TIME) {
+            doClick(view);
+            lastClickTime = curClickTime;
+        }
+    }
+
+    /**
+     * 按钮防抖动
+     */
+    public void doClick(View view) {
 
     }
 

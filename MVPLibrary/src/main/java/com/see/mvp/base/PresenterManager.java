@@ -70,14 +70,12 @@ public class PresenterManager {
             return null;
         }
 
-        Class<T> presenterClass = (Class<T>) ((ParameterizedType) type).getActualTypeArguments()[0];
         T presenter;
         try {
+            Class<T> presenterClass = (Class<T>) ((ParameterizedType) type).getActualTypeArguments()[0];
             presenter = presenterClass.newInstance();
-        } catch (InstantiationException e) {
-            throw new RuntimeException(e);
-        } catch (IllegalAccessException e) {
-            throw new RuntimeException(e);
+        } catch (ClassCastException | InstantiationException | IllegalAccessException e) {
+            return null;
         }
         return presenter;
     }

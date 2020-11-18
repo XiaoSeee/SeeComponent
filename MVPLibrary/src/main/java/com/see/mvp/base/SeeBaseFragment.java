@@ -3,12 +3,12 @@ package com.see.mvp.base;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.IdRes;
-import android.support.annotation.MenuRes;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.support.v7.widget.Toolbar;
+import androidx.annotation.IdRes;
+import androidx.annotation.MenuRes;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.appcompat.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,6 +27,7 @@ public abstract class SeeBaseFragment<PresenterType extends Presenter> extends F
     protected Context mContext;
     protected View mRootView;
     protected TextView mTitle;
+    protected CharSequence mTitleChar;
     protected Toolbar mToolbar;
     /**
      * 表示UI是否准备好。
@@ -72,8 +73,13 @@ public abstract class SeeBaseFragment<PresenterType extends Presenter> extends F
         mIsPrepared = true;
         initToolbar();
         initView(savedInstanceState);
-        loadData();
         return mRootView;
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        loadData();
+        super.onViewCreated(view, savedInstanceState);
     }
 
     @Override
@@ -81,6 +87,14 @@ public abstract class SeeBaseFragment<PresenterType extends Presenter> extends F
         super.setUserVisibleHint(isVisibleToUser);
         if (isVisibleToUser) {
             loadData();
+        }
+    }
+
+    @Override
+    public void onHiddenChanged(boolean hidden) {
+        super.onHiddenChanged(hidden);
+        if (!hidden) {
+            callOnActivity(SET_TITLE, mTitleChar);
         }
     }
 
@@ -154,10 +168,11 @@ public abstract class SeeBaseFragment<PresenterType extends Presenter> extends F
     }
 
     public void setTitle(CharSequence title) {
+        mTitleChar = title;
         if (mTitle != null) {
-            mTitle.setText(title);
+            mTitle.setText(mTitleChar);
         } else {
-            callOnActivity(SET_TITLE, title);
+            callOnActivity(SET_TITLE, mTitleChar);
         }
     }
 
@@ -186,8 +201,23 @@ public abstract class SeeBaseFragment<PresenterType extends Presenter> extends F
         return (E) mRootView.findViewById(id);
     }
 
+    //第二次点击按钮的点击间隔不能少于400毫秒
+    private static final int MIN_CLICK_DELAY_TIME = 400;
+    private long lastClickTime;
+
     @Override
     public void onClick(View view) {
+        long curClickTime = System.currentTimeMillis();
+        if ((curClickTime - lastClickTime) >= MIN_CLICK_DELAY_TIME) {
+            doClick(view);
+            lastClickTime = curClickTime;
+        }
+    }
+
+    /**
+     * 按钮防抖动
+     */
+    public void doClick(View view) {
 
     }
 
