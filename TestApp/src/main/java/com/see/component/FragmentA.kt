@@ -9,6 +9,8 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.onNavDestinationSelected
 import com.alibaba.android.arouter.facade.annotation.Route
+import com.see.component.ble.ControllerViewModel
+import com.see.mvvm.viewmodel.appViewModels
 import kotlinx.android.synthetic.main.fragment_a.*
 
 /**
@@ -16,6 +18,8 @@ import kotlinx.android.synthetic.main.fragment_a.*
  */
 @Route(path = "/app/fragment/a")
 class FragmentA : Fragment() {
+    val mControllerViewModel: ControllerViewModel by appViewModels()
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_a, container, false)
     }

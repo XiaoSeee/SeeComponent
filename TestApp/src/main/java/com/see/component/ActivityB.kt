@@ -3,7 +3,7 @@ package com.see.component
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.alibaba.android.arouter.facade.annotation.Route
-import com.see.component.nav.NavFactory
+import com.see.mvvm.navigation.NavFactory
 
 /**
  * @author by wuxiang@tinglibao.com.cn on 2020/11/18.

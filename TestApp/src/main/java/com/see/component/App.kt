@@ -1,12 +1,12 @@
 package com.see.component
 
-import android.app.Application
 import com.alibaba.android.arouter.launcher.ARouter
+import com.see.mvvm.viewmodel.SeeApplication
 
 /**
  * @author by wuxiang@tinglibao.com.cn on 2020/11/18.
  */
-class App : Application() {
+class App : SeeApplication() {
     override fun onCreate() {
         super.onCreate()
 

@@ -4,12 +4,12 @@ import android.util.SparseArray
 import androidx.lifecycle.ViewModel
 
 /**
- * @author by wuxiang@tinglibao.com.cn on 2020/11/23.
+ * @author by XiaoSe on 2020/11/23.
  */
-data class BindingConfig(val layout: Int, val variable: Int, val viewModel: ViewModel) {
+data class BindingConfig(val layout: Int) {
     val bindingParams = SparseArray<Any>()
 
-    fun addBindingParams(variable: Int, any: Any): BindingConfig {
+    fun addVariable(variable: Int, any: Any): BindingConfig {
         bindingParams.put(variable, any)
         return this
     }
