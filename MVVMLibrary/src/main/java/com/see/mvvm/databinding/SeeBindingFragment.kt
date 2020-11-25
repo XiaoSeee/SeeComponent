@@ -15,12 +15,13 @@ abstract class SeeBindingFragment : Fragment() {
     abstract fun getBindingConfig(): BindingConfig
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        val bindingConfig = getBindingConfig()
         val binding: ViewDataBinding =
-                DataBindingUtil.inflate(inflater, getBindingConfig().layout, container, false)
+                DataBindingUtil.inflate(inflater, bindingConfig.layout, container, false)
         binding.lifecycleOwner = this
-        for (i: Int in 0 until getBindingConfig().bindingParams.size()) {
-            binding.setVariable(getBindingConfig().bindingParams.keyAt(i),
-                    getBindingConfig().bindingParams.valueAt(i))
+        for (i: Int in 0 until bindingConfig.bindingParams.size()) {
+            binding.setVariable(bindingConfig.bindingParams.keyAt(i),
+                    bindingConfig.bindingParams.valueAt(i))
         }
         return binding.root
     }

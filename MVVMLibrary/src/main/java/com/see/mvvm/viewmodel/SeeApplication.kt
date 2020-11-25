@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModelStore
 import androidx.lifecycle.ViewModelStoreOwner
 
 /**
+ * 继承 [ViewModelStoreOwner] 用来存放 [androidx.lifecycle.ViewModel]
  * @author by XiaoSe on 2020/11/23.
  */
 open class SeeApplication : Application(), ViewModelStoreOwner {

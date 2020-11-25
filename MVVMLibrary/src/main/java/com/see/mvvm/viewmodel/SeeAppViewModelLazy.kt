@@ -13,7 +13,7 @@ import androidx.lifecycle.ViewModelStore
  */
 
 /**
- * 扩展一个存放在 Application 的全局 ViewModels
+ * 扩展一个存放在 Application 的全局 ViewModels。应用的 Application 必须继承于 [SeeApplication]
  */
 @MainThread
 inline fun <reified VM : ViewModel> ComponentActivity.appViewModels(
@@ -27,7 +27,7 @@ inline fun <reified VM : ViewModel> ComponentActivity.appViewModels(
 }
 
 /**
- * 扩展一个存放在 Application 的全局 ViewModels
+ * 扩展一个存放在 Application 的全局 ViewModels。应用的 Application 必须继承于 [SeeApplication]
  */
 @MainThread
 inline fun <reified VM : ViewModel> Fragment.appViewModels(
