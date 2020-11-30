@@ -9,7 +9,6 @@ class ControllerViewModel : ViewModel() {
     }
 
     fun addOne() {
-        val old = scanWidth.value
-        scanWidth.value = old?.plus(1)
+        scanWidth.value = scanWidth.value!! + 1
     }
 }

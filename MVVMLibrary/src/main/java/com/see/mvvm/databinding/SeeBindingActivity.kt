@@ -13,12 +13,12 @@ abstract class SeeBindingActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val binding: ViewDataBinding =
-                DataBindingUtil.setContentView(this, getBindingConfig().layout)
+        val bindingConfig = getBindingConfig()
+        val binding: ViewDataBinding = DataBindingUtil.setContentView(this, bindingConfig.layout)
         binding.lifecycleOwner = this
-        for (i: Int in 0 until getBindingConfig().bindingParams.size()) {
-            binding.setVariable(getBindingConfig().bindingParams.keyAt(i),
-                    getBindingConfig().bindingParams.valueAt(i))
+        for (i: Int in 0 until bindingConfig.bindingParams.size()) {
+            binding.setVariable(bindingConfig.bindingParams.keyAt(i),
+                    bindingConfig.bindingParams.valueAt(i))
         }
     }
 }
