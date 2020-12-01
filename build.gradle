@@ -2,10 +2,16 @@
 
 buildscript {
     ext {
-        kotlin_version = '1.4.20'
-        nav_version = '2.3.1'
-        router_version = '1.5.1'
-        lifecycle_version = '2.2.0'
+        kotlin = '1.4.20'
+        appcompat = '1.2.0'
+        activity = '1.1.0'
+        fragment = '1.2.5'
+        material = '1.2.1'
+        recyclerview = '1.1.0'
+        constraintlayout = '2.0.4'
+        navigation = '2.3.1'
+        arouter = '1.5.1'
+        lifecycle = '2.2.0'
     }
     repositories {
         jcenter()
@@ -14,7 +20,7 @@ buildscript {
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:4.1.1'
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin"
 
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files

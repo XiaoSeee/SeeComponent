@@ -1,7 +1,6 @@
 package com.see.mvvm.databinding
 
 import android.util.SparseArray
-import androidx.lifecycle.ViewModel
 
 /**
  * @author by XiaoSe on 2020/11/23.

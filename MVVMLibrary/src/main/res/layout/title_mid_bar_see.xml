@@ -11,5 +11,6 @@
         android:background="?attr/colorPrimary"
         android:gravity="center"
         android:minHeight="?attr/actionBarSize"
-        app:popupTheme="?attr/actionBarPopupTheme" />
+        app:popupTheme="@style/ToolbarTheme"
+        app:theme="@style/ToolbarTheme" />
 </com.google.android.material.appbar.AppBarLayout>

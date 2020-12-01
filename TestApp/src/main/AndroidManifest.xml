@@ -12,8 +12,7 @@
         android:theme="@style/BaseTheme">
 
         <activity
-            android:name=".ActivityB"
-            android:label="ActivityB-label">
+            android:name=".ActivityA">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
                 <action android:name="android.intent.action.MAIN" />
@@ -22,6 +21,6 @@
             </intent-filter>
         </activity>
         <activity android:name=".ble.MainActivity" />
-        <activity android:name=".ActivityA" />
+        <activity android:name=".ActivityB" />
     </application>
 </manifest>

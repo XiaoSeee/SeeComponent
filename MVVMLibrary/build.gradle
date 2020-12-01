@@ -40,14 +40,13 @@ android {
 }
 
 dependencies {
-    implementation "org.jetbrains.kotlin:kotlin-stdlib:$rootProject.kotlin_version"
-    implementation "org.jetbrains.kotlin:kotlin-reflect:$rootProject.kotlin_version"
-    implementation 'androidx.appcompat:appcompat:1.2.0'
-    implementation "androidx.activity:activity-ktx:1.1.0"
-    implementation "androidx.fragment:fragment-ktx:1.2.5"
-    implementation "com.google.android.material:material:1.2.1"
-    implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
-    implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$rootProject.kotlin"
+    implementation "androidx.appcompat:appcompat:$rootProject.appcompat"
+    implementation "androidx.activity:activity-ktx:$rootProject.activity"
+    implementation "androidx.fragment:fragment-ktx:$rootProject.fragment"
+    implementation "com.google.android.material:material:$rootProject.material"
+    implementation "androidx.navigation:navigation-fragment-ktx:$rootProject.navigation"
+    implementation "androidx.navigation:navigation-ui-ktx:$rootProject.navigation"
 
-    compileOnly "com.alibaba:arouter-api:$router_version"
+    compileOnly "com.alibaba:arouter-api:$rootProject.arouter"
 }

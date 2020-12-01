@@ -7,20 +7,7 @@
         <item name="colorPrimaryDark">#8DE861</item>
         <!-- theme_color -->
         <item name="colorAccent">#6F79E8</item>
-
-        <item name="actionMenuTextColor">#D834E8</item>
-
-        <item name="actionBarPopupTheme">@style/ThemeOverlay.AppCompat.Dark</item>
-<!--        <item name="actionBarStyle">@style/ThemeOverlay.AppCompat.Dark</item>-->
-<!--        <item name="actionBarTheme">@style/ThemeOverlay.AppCompat.Dark</item>-->
-
-        <!--        <item name="android:windowBackground">@color/background</item>-->
-        <!-- 统一应用内Dialog的风格 -->
-        <!--        <item name="alertDialogTheme">@style/Base.ThemeOverlay.AppCompat.Dialog.Douting</item>-->
-        <!--        <item name="alertDialogStyle">@style/AlertDialog.AppCompat.Light.Douting</item>-->
-        <!--自定义 SearchView 风格-->
-        <!--        <item name="searchViewStyle">@style/Widget.AppCompat.SearchView.Douting</item>-->
-        <!--Toolbar Menu 风格-->
+        <!--Toolbar Popup Menu 风格-->
         <item name="actionOverflowMenuStyle">@style/OverflowMenuStyle</item>
     </style>
 
@@ -33,5 +20,12 @@
         <item name="android:dropDownVerticalOffset">3dp</item>
         <!-- 弹出层水平方向上的偏移，即距离屏幕左边的距离，负值会导致右边出现空隙 -->
         <item name="android:dropDownHorizontalOffset">0dp</item>
+    </style>
+
+    <style name="ToolbarTheme" parent="ThemeOverlay.AppCompat.Dark">
+        <!-- 返回箭头颜色 -->
+        <item name="colorControlNormal">#0AB4B3</item>
+        <!-- 标题和菜单文字颜色 -->
+        <item name="android:textColorPrimary">#B400A2</item>
     </style>
 </resources>

@@ -47,23 +47,23 @@ dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation project(':MVVMLibrary')
 
-    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-    implementation 'androidx.appcompat:appcompat:1.2.0'
-    implementation "androidx.fragment:fragment-ktx:1.2.5"
-    implementation "androidx.recyclerview:recyclerview:1.1.0"
-    implementation "androidx.constraintlayout:constraintlayout:2.0.4"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$rootProject.kotlin"
+    implementation "androidx.appcompat:appcompat:$rootProject.appcompat"
+    implementation "androidx.fragment:fragment-ktx:$rootProject.fragment"
+    implementation "androidx.recyclerview:recyclerview:$rootProject.recyclerview"
+    implementation "androidx.constraintlayout:constraintlayout:$rootProject.constraintlayout"
 
     //Navigation
-    implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
-    implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
+    implementation "androidx.navigation:navigation-fragment-ktx:$rootProject.navigation"
+    implementation "androidx.navigation:navigation-ui-ktx:$rootProject.navigation"
 
     //ARouter
-    kapt "com.alibaba:arouter-compiler:$router_version"
-    implementation "com.alibaba:arouter-api:$router_version"
+    kapt "com.alibaba:arouter-compiler:$rootProject.arouter"
+    implementation "com.alibaba:arouter-api:$rootProject.arouter"
 
     //Lifecycle ViewModel LiveData
-    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
-    implementation "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version"
-    implementation "androidx.lifecycle:lifecycle-viewmodel-savedstate:$lifecycle_version"
-    implementation "androidx.lifecycle:lifecycle-service:$lifecycle_version"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$rootProject.lifecycle"
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:$rootProject.lifecycle"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-savedstate:$rootProject.lifecycle"
+    implementation "androidx.lifecycle:lifecycle-service:$rootProject.lifecycle"
 }

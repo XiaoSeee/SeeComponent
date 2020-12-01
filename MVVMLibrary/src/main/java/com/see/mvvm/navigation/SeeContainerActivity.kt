@@ -43,13 +43,13 @@ abstract class SeeContainerActivity(
         val navController = navHostFragment.navController
         val appBarConfiguration =
                 if (isTopLevel())
+                    AppBarConfiguration(navController.graph)
+                else
                     AppBarConfiguration.Builder()
                             .setFallbackOnNavigateUpListener {
                                 onBackPressed()
                                 true
                             }.build()
-                else
-                    AppBarConfiguration(navController.graph)
 
         setSupportActionBar(mTitleBar)
         navController.addOnDestinationChangedListener(
