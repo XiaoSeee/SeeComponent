@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/action_other"
+        android:title="@string/common_other"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/action_settings"
+        android:icon="@drawable/ic_menu_more"
+        android:title="@string/common_setting"
+        app:showAsAction="ifRoom">
+        <menu>
+            <item
+                android:id="@+id/consultation"
+                android:icon="@drawable/consultation"
+                android:title="@string/consultation"
+                app:showAsAction="ifRoom" />
+            <item
+                android:id="@+id/feedback"
+                android:icon="@drawable/feedback"
+                android:title="@string/feedback"
+                app:showAsAction="ifRoom" />
+            <item
+                android:id="@+id/protocol"
+                android:icon="@drawable/about_protocol"
+                android:title="@string/user_agreement"
+                app:showAsAction="ifRoom" />
+            <item
+                android:id="@+id/logout"
+                android:icon="@drawable/log_out"
+                android:title="@string/log_out"
+                app:showAsAction="ifRoom" />
+        </menu>
+    </item>
+</menu>

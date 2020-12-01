@@ -1,5 +1,6 @@
 package com.see.component.ble
 
+import android.view.View
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
@@ -8,7 +9,7 @@ class ControllerViewModel : ViewModel() {
         MutableLiveData<Int>(6)
     }
 
-    fun addOne() {
+    fun addOne(view: View) {
         scanWidth.value = scanWidth.value!! + 1
     }
 }

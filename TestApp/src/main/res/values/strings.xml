@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">See Component</string>
+    <string name="common_other">其他</string>
+    <string name="common_setting">设置</string>
+    <string name="consultation">联系客服</string>
+    <string name="feedback">意见反馈</string>
+    <string name="user_agreement">隐私协议</string>
+    <string name="log_out">退出账户</string>
 </resources>

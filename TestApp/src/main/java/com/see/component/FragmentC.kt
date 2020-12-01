@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.alibaba.android.arouter.facade.annotation.Route
-import kotlinx.android.synthetic.main.fragment_c.*
 
 /**
  * @author by wuxiang@tinglibao.com.cn on 2020/11/19.
@@ -20,7 +19,7 @@ class FragmentC : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        main_text.setOnClickListener {
+        view.findViewById<View>(R.id.main_text).setOnClickListener {
             findNavController().navigate(R.id.nav_action_a)
         }
     }

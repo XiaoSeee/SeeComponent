@@ -5,13 +5,10 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <com.see.mvvm.widget.TitleBar
-        android:id="@+id/activity_toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/see_title_bar_default_height" />
+    <include layout="@layout/title_bar_mid_see" />
 
     <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/nav_host_fragment"
+        android:id="@id/nav_host_fragment"
         android:name="NavHostFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

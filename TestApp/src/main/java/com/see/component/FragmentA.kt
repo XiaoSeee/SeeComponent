@@ -11,8 +11,6 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.onNavDestinationSelected
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.see.component.ble.ControllerViewModel
-import com.see.mvvm.viewmodel.appViewModels
-import kotlinx.android.synthetic.main.fragment_a.*
 
 /**
  * @author by wuxiang@tinglibao.com.cn on 2020/11/18.
@@ -27,7 +25,7 @@ class FragmentA : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        main_text.setOnClickListener {
+        view.findViewById<View>(R.id.main_text).setOnClickListener {
             findNavController().navigate(R.id.nav_action_a)
         }
     }

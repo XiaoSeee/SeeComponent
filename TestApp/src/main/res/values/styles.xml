@@ -1,3 +1,37 @@
 <resources>
+    <!-- Base application theme. -->
+    <style name="BaseTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- top_bar_color -->
+        <item name="colorPrimary">#E84A3C</item>
+        <!-- status_bar_color -->
+        <item name="colorPrimaryDark">#8DE861</item>
+        <!-- theme_color -->
+        <item name="colorAccent">#6F79E8</item>
 
+        <item name="actionMenuTextColor">#D834E8</item>
+
+        <item name="actionBarPopupTheme">@style/ThemeOverlay.AppCompat.Dark</item>
+<!--        <item name="actionBarStyle">@style/ThemeOverlay.AppCompat.Dark</item>-->
+<!--        <item name="actionBarTheme">@style/ThemeOverlay.AppCompat.Dark</item>-->
+
+        <!--        <item name="android:windowBackground">@color/background</item>-->
+        <!-- 统一应用内Dialog的风格 -->
+        <!--        <item name="alertDialogTheme">@style/Base.ThemeOverlay.AppCompat.Dialog.Douting</item>-->
+        <!--        <item name="alertDialogStyle">@style/AlertDialog.AppCompat.Light.Douting</item>-->
+        <!--自定义 SearchView 风格-->
+        <!--        <item name="searchViewStyle">@style/Widget.AppCompat.SearchView.Douting</item>-->
+        <!--Toolbar Menu 风格-->
+        <item name="actionOverflowMenuStyle">@style/OverflowMenuStyle</item>
+    </style>
+
+    <style name="OverflowMenuStyle" parent="Widget.AppCompat.PopupMenu.Overflow">
+        <!-- 是否覆盖锚点，默认为true，即盖住Toolbar -->
+        <item name="overlapAnchor">false</item>
+        <!-- 弹出层背景颜色 -->
+        <item name="android:popupBackground">?attr/colorPrimary</item>
+        <!-- 弹出层垂直方向上的偏移，即在竖直方向上距离Toolbar的距离，值为负则会盖住Toolbar -->
+        <item name="android:dropDownVerticalOffset">3dp</item>
+        <!-- 弹出层水平方向上的偏移，即距离屏幕左边的距离，负值会导致右边出现空隙 -->
+        <item name="android:dropDownHorizontalOffset">0dp</item>
+    </style>
 </resources>

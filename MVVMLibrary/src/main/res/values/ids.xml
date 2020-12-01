@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <item name="nav_host_fragment" type="id" />
+    <item name="activity_title_bar" type="id" />
+
     <item name="nav_action_a" type="id" />
     <item name="nav_action_b" type="id" />
     <item name="nav_action_c" type="id" />
@@ -10,4 +13,8 @@
     <item name="nav_action_h" type="id" />
     <item name="nav_action_i" type="id" />
     <item name="nav_action_j" type="id" />
+    <item name="nav_action_k" type="id" />
+    <item name="nav_action_l" type="id" />
+    <item name="nav_action_m" type="id" />
+    <item name="nav_action_n" type="id" />
 </resources>

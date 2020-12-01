@@ -1,5 +1,6 @@
 package com.see.mvvm.widget
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.res.ColorStateList
 import android.text.TextUtils
@@ -14,6 +15,8 @@ import androidx.appcompat.widget.Toolbar
 import com.see.mvvm.R
 
 /**
+ * 实现 title 在中间的 Toolbar 使用 [android:gravity="center"] 来控制
+ *
  * @author by wuxiang@tinglibao.com.cn on 2020/11/25.
  */
 class TitleBar @JvmOverloads constructor(context: Context,
@@ -52,6 +55,8 @@ class TitleBar @JvmOverloads constructor(context: Context,
      */
     private var mCenterTitle: CharSequence? = null
 
+    var mTitleGravity = Gravity.START
+
     init {
         resolveAttrs(attrs, defStyleAttr)
     }
@@ -62,12 +67,21 @@ class TitleBar @JvmOverloads constructor(context: Context,
      * @param attrs        AttributeSet
      * @param defStyleAttr defStyleAttr
      */
+    @SuppressLint("CustomViewStyleable")
     private fun resolveAttrs(attrs: AttributeSet?, defStyleAttr: Int) {
-        // Need to use getContext() here so that we use the themed context
         val a = context.obtainStyledAttributes(attrs, R.styleable.Toolbar, defStyleAttr, 0)
         mCenterTitleTextAppearance = a.getResourceId(R.styleable.Toolbar_titleTextAppearance, 0)
         mCenterTitleTextColor = a.getColorStateList(R.styleable.Toolbar_titleTextColor)
+        mTitleGravity = a.getInteger(R.styleable.Toolbar_android_gravity, mTitleGravity)
         a.recycle()
+    }
+
+    override fun setTitle(title: CharSequence?) {
+        if (mTitleGravity == Gravity.CENTER) {
+            setCenterTitle(title)
+        } else {
+            super.setTitle(title)
+        }
     }
 
     /**
