@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <include layout="@layout/title_mid_bar_see" />
+    <include layout="@layout/app_bar_mid_mvvm" />
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@id/nav_host_fragment"
