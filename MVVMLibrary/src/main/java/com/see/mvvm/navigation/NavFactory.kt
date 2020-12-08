@@ -9,7 +9,7 @@ import com.alibaba.android.arouter.launcher.ARouter
 /**
  * @author by XiaoSe on 2020/11/18.
  */
-class NavFactory(private val graphResId: Int, private val startDestinationArgs: Bundle? = null) : FragmentFactory() {
+class NavFactory(private val graphResId: Int = 0, private val startDestinationArgs: Bundle? = null) : FragmentFactory() {
     override fun instantiate(classLoader: ClassLoader, className: String): Fragment {
         return when {
             className.startsWith("/") -> {
