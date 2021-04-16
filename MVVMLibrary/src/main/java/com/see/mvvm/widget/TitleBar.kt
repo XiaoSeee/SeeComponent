@@ -1,7 +1,9 @@
 package com.see.mvvm.widget
 
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.content.Context
+import android.content.ContextWrapper
 import android.content.res.ColorStateList
 import android.text.TextUtils
 import android.util.AttributeSet
@@ -74,6 +76,29 @@ class TitleBar @JvmOverloads constructor(context: Context,
         mCenterTitleTextColor = a.getColorStateList(R.styleable.Toolbar_titleTextColor)
         mTitleGravity = a.getInteger(R.styleable.Toolbar_android_gravity, mTitleGravity)
         a.recycle()
+    }
+
+    fun getActivity(): Activity {
+        // Gross way of unwrapping the Activity so we can get the FragmentManager
+        var context = context
+        while (context is ContextWrapper) {
+            if (context is Activity) {
+                return context
+            }
+            context = context.baseContext
+        }
+        throw IllegalStateException("The MediaRouteButton's Context is not an Activity.")
+    }
+
+    val mActivity: Activity? by lazy {
+        var con = context
+        while (con is ContextWrapper) {
+            if (con is Activity) {
+                return@lazy con
+            }
+            con = con.baseContext
+        }
+        return@lazy null
     }
 
     override fun setTitle(title: CharSequence?) {

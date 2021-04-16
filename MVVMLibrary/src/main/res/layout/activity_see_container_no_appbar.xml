@@ -5,7 +5,15 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <include layout="@layout/app_bar_mid_mvvm" />
+    <com.see.mvvm.widget.TitleBar
+        android:id="@id/activity_title_bar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        android:gravity="center"
+        android:minHeight="?attr/actionBarSize"
+        app:popupTheme="@style/ToolbarTheme"
+        app:theme="@style/ToolbarTheme" />
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@id/nav_host_fragment"

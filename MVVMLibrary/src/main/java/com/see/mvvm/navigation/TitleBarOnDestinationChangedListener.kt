@@ -83,7 +83,7 @@ class TitleBarOnDestinationChangedListener(titleBar: TitleBar, configuration: Ap
     }
 
     private fun setTitle(title: CharSequence) {
-        mTitleBarWeakReference.get()?.title = title
+        mTitleBarWeakReference.get()?.mActivity?.title = title
     }
 
     @SuppressLint("ObjectAnimatorBinding")

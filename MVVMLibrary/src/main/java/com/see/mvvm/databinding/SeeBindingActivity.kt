@@ -2,6 +2,7 @@ package com.see.mvvm.databinding
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.util.isEmpty
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import com.see.mvvm.R
@@ -18,24 +19,26 @@ abstract class SeeBindingActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val bindingConfig = getBindingConfig()
-        val binding: ViewDataBinding = DataBindingUtil.setContentView(this, bindingConfig.layout)
-        binding.lifecycleOwner = this
-        for (i: Int in 0 until bindingConfig.bindingParams.size()) {
-            binding.setVariable(bindingConfig.bindingParams.keyAt(i),
-                    bindingConfig.bindingParams.valueAt(i))
+        if (bindingConfig.bindingParams.isEmpty()) {
+            setContentView(bindingConfig.layout)
+        } else {
+            val binding: ViewDataBinding = DataBindingUtil.setContentView(this, bindingConfig.layout)
+            binding.lifecycleOwner = this
+            for (i: Int in 0 until bindingConfig.bindingParams.size()) {
+                binding.setVariable(bindingConfig.bindingParams.keyAt(i),
+                        bindingConfig.bindingParams.valueAt(i))
+            }
         }
 
-        mTitleBar = findViewById(R.id.activity_title_bar)
-        if (mTitleBar != null) {
-            initTitleBar()
-        }
+        initTitleBar()
     }
 
     private fun initTitleBar() {
-        setSupportActionBar(mTitleBar)
-        supportActionBar?.setDisplayHomeAsUpEnabled(!isTopLevel())
-        mTitleBar?.setNavigationOnClickListener {
-            onBackPressed()
+        mTitleBar = findViewById(R.id.activity_title_bar)
+        mTitleBar?.let {
+            setSupportActionBar(it)
+            supportActionBar?.setDisplayHomeAsUpEnabled(!isTopLevel())
+            it.setNavigationOnClickListener { onBackPressed() }
         }
     }
 

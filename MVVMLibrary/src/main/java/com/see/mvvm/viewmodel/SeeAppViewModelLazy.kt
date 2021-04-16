@@ -3,10 +3,7 @@ package com.see.mvvm.viewmodel
 import androidx.activity.ComponentActivity
 import androidx.annotation.MainThread
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelLazy
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelStore
+import androidx.lifecycle.*
 
 /**
  * @author by XiaoSe on 2020/11/23.
@@ -14,6 +11,7 @@ import androidx.lifecycle.ViewModelStore
 
 /**
  * 扩展一个存放在 Application 的全局 ViewModels。应用的 Application 必须继承于 [SeeApplication]
+ * 或者参照它给你自己的 Application 实现 [ViewModelStoreOwner] 接口
  */
 @MainThread
 inline fun <reified VM : ViewModel> ComponentActivity.appViewModels(
@@ -28,6 +26,7 @@ inline fun <reified VM : ViewModel> ComponentActivity.appViewModels(
 
 /**
  * 扩展一个存放在 Application 的全局 ViewModels。应用的 Application 必须继承于 [SeeApplication]
+ * 或者参照它给你自己的 Application 实现 [ViewModelStoreOwner] 接口
  */
 @MainThread
 inline fun <reified VM : ViewModel> Fragment.appViewModels(
@@ -45,9 +44,9 @@ fun ComponentActivity.getAppViewModelStore(): ViewModelStore {
         ("Your activity is not yet attached to the Application instance.")
     }
 
-    if (application !is SeeApplication) {
-        throw IllegalStateException("Your application is not a SeeApplication.")
+    if (application !is ViewModelStoreOwner) {
+        throw IllegalStateException("Your application is not a ViewModelStoreOwner.")
     }
 
-    return (application as SeeApplication).viewModelStore
+    return (application as ViewModelStoreOwner).viewModelStore
 }

@@ -1,7 +1,10 @@
 package com.see.mvvm.navigation
 
 import android.os.Bundle
+import android.os.PersistableBundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.NavController
+import androidx.navigation.NavDestination
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI
@@ -9,53 +12,78 @@ import com.see.mvvm.R
 import com.see.mvvm.widget.TitleBar
 
 /**
- * @param graphResId 定义的NavigationViewId
- * @param contentLayoutId ContentViewId，不传的话用默认的
  * @author by XiaoSe on 2020/11/23.
  */
-abstract class SeeContainerActivity(
-        private val graphResId: Int,
-        private val contentLayoutId: Int = R.layout.activity_see_container,
-) : AppCompatActivity() {
+abstract class SeeContainerActivity : AppCompatActivity(), OnCallListener {
 
     private var mTitleBar: TitleBar? = null
 
+    protected lateinit var navController: NavController
+
+    abstract fun getNavConfig(): NavConfig
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        supportFragmentManager.fragmentFactory = NavFactory(graphResId, getStartArgs())
-        setContentView(contentLayoutId)
+        val config = getNavConfig()
+        // 如果启动 Activity 有指定起始页
+        val actionStartDestId = intent.getIntExtra(START_DEST_ID, 0)
+        if (actionStartDestId != 0) {
+            config.startDestId = actionStartDestId
+        }
+        supportFragmentManager.fragmentFactory = NavFactory(config.hostFragment, config.startArgs)
+        setContentView(config.contentLayoutId)
+        initTitleBar(config)
+        initNavigation(config)
+    }
 
-        mTitleBar = findViewById(R.id.activity_title_bar)
-        if (mTitleBar != null) {
-            initTitleBar()
+    override fun onPostCreate(savedInstanceState: Bundle?, persistentState: PersistableBundle?) {
+        super.onPostCreate(savedInstanceState, persistentState)
+    }
+
+    private fun initNavigation(config: NavConfig) {
+        if (config.hostFragment.endsWith("NavHostFragment")) {
+            val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
+            navController = navHostFragment.navController
+            // 获取 navGraph
+            val navGraph = navController.navInflater.inflate(config.graphResId)
+            if (config.startDestId != 0) {
+                navGraph.startDestination = config.startDestId
+            }
+            // 设置 TitleBar 事件
+            mTitleBar?.let {
+                val builder = if (isTopLevel()) {
+                    AppBarConfiguration.Builder(navGraph.startDestination)
+                } else {
+                    AppBarConfiguration.Builder()
+                }
+
+                val appBarConfiguration = builder.setFallbackOnNavigateUpListener {
+                    onBackPressed()
+                    true
+                }.build()
+
+                navController.addOnDestinationChangedListener(TitleBarOnDestinationChangedListener(it, appBarConfiguration))
+                it.setNavigationOnClickListener {
+                    NavigationUI.navigateUp(navController, appBarConfiguration)
+                }
+            }
+            // 设置全局监听
+            navController.addOnDestinationChangedListener { controller, destination, arguments ->
+                onDestinationChanged(controller, destination, arguments)
+            }
+            // 设置 navGraph
+            navController.setGraph(navGraph, config.startArgs)
         }
     }
 
-    /**
-     * 获取启动参数
-     */
-    open fun getStartArgs(): Bundle? {
-        return null
-    }
-
-    private fun initTitleBar() {
-        val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
-        val navController = navHostFragment.navController
-        val appBarConfiguration =
-                if (isTopLevel())
-                    AppBarConfiguration(navController.graph)
-                else
-                    AppBarConfiguration.Builder()
-                            .setFallbackOnNavigateUpListener {
-                                onBackPressed()
-                                true
-                            }.build()
-
-        setSupportActionBar(mTitleBar)
-        navController.addOnDestinationChangedListener(
-                TitleBarOnDestinationChangedListener(mTitleBar!!, appBarConfiguration))
-        mTitleBar?.setNavigationOnClickListener {
-            NavigationUI.navigateUp(navController, appBarConfiguration)
+    private fun initTitleBar(config: NavConfig) {
+        mTitleBar = findViewById(R.id.activity_title_bar)
+        mTitleBar?.let {
+            setSupportActionBar(it)
+            if (!config.hostFragment.endsWith("NavHostFragment")) {
+                supportActionBar?.setDisplayHomeAsUpEnabled(!isTopLevel())
+                it.setNavigationOnClickListener { onBackPressed() }
+            }
         }
     }
 
@@ -65,5 +93,13 @@ abstract class SeeContainerActivity(
      */
     open fun isTopLevel(): Boolean {
         return false
+    }
+
+    open fun onDestinationChanged(controller: NavController, dest: NavDestination, args: Bundle?) {
+
+    }
+
+    override fun callOnActivity(what: Int, args: Bundle?) {
+
     }
 }

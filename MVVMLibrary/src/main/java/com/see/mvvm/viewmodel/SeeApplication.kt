@@ -9,7 +9,7 @@ import androidx.lifecycle.ViewModelStoreOwner
  * @author by XiaoSe on 2020/11/23.
  */
 open class SeeApplication : Application(), ViewModelStoreOwner {
-    private val mViewModelStore: ViewModelStore by lazy {
+    protected val mViewModelStore: ViewModelStore by lazy {
         ViewModelStore()
     }
 
