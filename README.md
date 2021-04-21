@@ -4,7 +4,7 @@
 ### mvp
 
 ```groovy
-implementation 'io.github.xiaoseee:mvp:1.0.0'
+implementation 'io.github.xiaoseee:mvp:1.1.0'
 ```
 
 
