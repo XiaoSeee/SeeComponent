@@ -6,8 +6,8 @@
     android:layout_height="?attr/actionBarSize"
     android:background="?attr/colorPrimary"
     android:minHeight="?attr/actionBarSize"
-    app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-    app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+    app:popupTheme="@style/ToolbarTheme"
+    app:theme="@style/ToolbarTheme">
 
     <TextView
         android:id="@id/toolbar_title"
@@ -15,6 +15,6 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:maxLines="1"
-        android:textColor="@android:color/primary_text_dark"
-        android:textSize="21sp" />
+        android:textColor="@color/top_bar_title"
+        android:textSize="@dimen/top_bar_title_size" />
 </androidx.appcompat.widget.Toolbar>
