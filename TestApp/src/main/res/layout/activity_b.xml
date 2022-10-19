@@ -6,7 +6,7 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <include layout="@layout/title_mid_bar_see" />
+        <include layout="@layout/titlebar_title_mid" />
 
         <Button
             android:id="@+id/activity_b_bt"

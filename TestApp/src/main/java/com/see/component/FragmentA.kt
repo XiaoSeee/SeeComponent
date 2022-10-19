@@ -1,10 +1,7 @@
 package com.see.component
 
 import android.os.Bundle
-import android.view.Menu
-import android.view.MenuInflater
-import android.view.MenuItem
-import android.view.View
+import android.view.*
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.onNavDestinationSelected
@@ -19,14 +16,13 @@ import com.see.mvvm.databinding.SeeBindingFragment
 @Route(path = "/app/fragment/a")
 class FragmentA : SeeBindingFragment() {
     val mControllerViewModel: ControllerViewModel by viewModels()
+    override fun getBindingConfig(inflater: LayoutInflater, container: ViewGroup?): BindingConfig {
+        return BindingConfig(R.layout.fragment_a)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
-    }
-
-    override fun getBindingConfig(): BindingConfig {
-        return BindingConfig(R.layout.fragment_a)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -43,6 +39,8 @@ class FragmentA : SeeBindingFragment() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return item.onNavDestinationSelected(findNavController()) || super.onOptionsItemSelected(item)
+        return item.onNavDestinationSelected(findNavController()) || super.onOptionsItemSelected(
+            item
+        )
     }
 }

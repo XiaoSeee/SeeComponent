@@ -1,9 +1,7 @@
 package com.see.component
 
 import android.os.Bundle
-import android.view.Menu
-import android.view.MenuInflater
-import android.view.View
+import android.view.*
 import androidx.navigation.fragment.findNavController
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.see.mvvm.databinding.BindingConfig
@@ -14,7 +12,7 @@ import com.see.mvvm.databinding.SeeBindingFragment
  */
 @Route(path = "/app/fragment/b")
 class FragmentB : SeeBindingFragment() {
-    override fun getBindingConfig(): BindingConfig {
+    override fun getBindingConfig(inflater: LayoutInflater, container: ViewGroup?): BindingConfig {
         return BindingConfig(R.layout.fragment_b)
     }
 
