@@ -1,8 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!--  mvp  -->
+    <item name="activity_toolbar" type="id" />
+    <item name="toolbar_title" type="id" />
+    <item name="recycler" type="id" />
+    <!--  navigation  -->
     <item name="nav_host_fragment" type="id" />
     <item name="activity_title_bar" type="id" />
-
+    <!--  用于导航操作  -->
     <item name="nav_action_a" type="id" />
     <item name="nav_action_b" type="id" />
     <item name="nav_action_c" type="id" />
@@ -17,4 +22,8 @@
     <item name="nav_action_l" type="id" />
     <item name="nav_action_m" type="id" />
     <item name="nav_action_n" type="id" />
+    <!--  用于全局操作  -->
+    <item name="nav_action_x" type="id" />
+    <item name="nav_action_y" type="id" />
+    <item name="nav_action_z" type="id" />
 </resources>

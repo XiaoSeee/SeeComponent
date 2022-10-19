@@ -1,4 +1,4 @@
-package com.see.mvvm.navigation
+package com.see.mvvm.listener
 
 import android.os.Bundle
 
@@ -6,5 +6,5 @@ import android.os.Bundle
  * @author by wuxiang@tinglibao.com.cn on 2021/1/27.
  */
 interface OnCallListener {
-    fun callOnActivity(what: Int, args: Bundle?)
+    fun callOnActivity(what: Int, args: Bundle)
 }

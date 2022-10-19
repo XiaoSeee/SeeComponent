@@ -1,27 +1,29 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
-
+// Java 8 最高支持 com.android.tools.build:gradle:4.2.2
+// build:gradle:4.2.2 最高支持 gradle-6.9.2-all.zip
+// build:gradle:4.2.2 最高支持 compileSdkVersion = 30
+// compileSdk(30) 最高支持 appcompat = '1.3.1'、activity = '1.3.1'、fragment = '1.3.6'、material = '1.4.0'、navigation = '2.3.5'、lifecycle = '2.3.1'
 buildscript {
     ext {
-        kotlin = '1.4.20'
-        appcompat = '1.2.0'
-        activity = '1.2.2'
-        fragment = '1.3.2'
-        material = '1.3.0'
-        recyclerview = '1.1.0'
-        constraintlayout = '2.0.4'
+        kotlin = '1.6.21'
+        appcompat = '1.3.1'
+        activity = '1.3.1'
+        fragment = '1.3.6'
+        material = '1.4.0'
         navigation = '2.3.5'
-        arouter = '1.5.1'
-        lifecycle = '2.2.0'
-        dokka = '1.4.30'
+        lifecycle = '2.3.1'
+        recyclerview = '1.2.1'
+        constraintlayout = '2.1.4'
+        arouter = '1.5.2'
+        dokka = '1.6.21'
     }
     repositories {
         mavenCentral()
-        jcenter()
         google()
         maven { url "https://jitpack.io" }
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:4.1.1'
+        classpath 'com.android.tools.build:gradle:4.2.2'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin"
         classpath "org.jetbrains.dokka:dokka-gradle-plugin:$dokka"
 
@@ -33,16 +35,15 @@ buildscript {
 allprojects {
     repositories {
         mavenCentral()
-        jcenter()
         google()
         maven { url "https://jitpack.io" }
     }
 }
 
 ext {
-    compileSdkVersion = 29
-    buildToolsVersion = "29.0.3"
-    minSdkVersion = 21
+    compileSdkVersion = 30
+    buildToolsVersion = "30.0.3"
+    minSdkVersion = 23
     targetSdkVersion = 28
     versionCode = 1
     versionName = "0.0.01"

@@ -1,7 +1,6 @@
 package com.see.mvvm.databinding
 
 import android.annotation.SuppressLint
-import android.app.Dialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -21,31 +20,58 @@ abstract class SeeBindingDialog : DialogFragment() {
     @SuppressLint("uncheck")
     protected lateinit var mRootView: View
 
+    protected val mBinding get() = _binding!!
+    private var _binding: ViewDataBinding? = null
+
     private var mTitleBar: TitleBar? = null
 
-    abstract fun getBindingConfig(): BindingConfig
+    /**
+     * see [SeeBindingFragment.getBindingConfig]
+     */
+    abstract fun getBindingConfig(inflater: LayoutInflater, container: ViewGroup?): BindingConfig
 
-    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        return super.onCreateDialog(savedInstanceState)
-    }
-
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val bindingConfig = getBindingConfig()
-        if (bindingConfig.bindingParams.isEmpty()) {
-            mRootView = inflater.inflate(bindingConfig.layout, container, false)
-        } else {
-            val binding: ViewDataBinding =
-                    DataBindingUtil.inflate(inflater, bindingConfig.layout, container, false)
-            binding.lifecycleOwner = this
-            for (i: Int in 0 until bindingConfig.bindingParams.size()) {
-                binding.setVariable(bindingConfig.bindingParams.keyAt(i),
-                        bindingConfig.bindingParams.valueAt(i))
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        val bindingConfig = getBindingConfig(inflater, container)
+        when {
+            bindingConfig.binding != null -> {
+                _binding = bindingConfig.binding?.also { iniBinding(it, bindingConfig) }
             }
-            mRootView = binding.root
+            bindingConfig.bindingParams.isEmpty() -> {
+                mRootView = inflater.inflate(bindingConfig.layout, container, false)
+            }
+            else -> {
+                _binding =
+                    DataBindingUtil.inflate<ViewDataBinding>(
+                        inflater,
+                        bindingConfig.layout,
+                        container,
+                        false
+                    ).also { iniBinding(it, bindingConfig) }
+            }
         }
 
         mTitleBar = mRootView.findViewById(R.id.activity_title_bar)
         return mRootView
+    }
+
+    private fun iniBinding(binding: ViewDataBinding, config: BindingConfig) {
+        binding.lifecycleOwner = viewLifecycleOwner
+        for (i: Int in 0 until config.bindingParams.size()) {
+            binding.setVariable(
+                config.bindingParams.keyAt(i),
+                config.bindingParams.valueAt(i)
+            )
+        }
+        mRootView = binding.root
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
     fun setTitle(titleId: Int) {

@@ -7,7 +7,6 @@ import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.view.Gravity
 import androidx.appcompat.graphics.drawable.DrawerArrowDrawable
-import androidx.customview.widget.Openable
 import androidx.navigation.FloatingWindow
 import androidx.navigation.NavController
 import androidx.navigation.NavController.OnDestinationChangedListener
@@ -27,23 +26,22 @@ import java.util.regex.Pattern
  *
  * @author by wuxiang@tinglibao.com.cn on 2020/12/1.
  */
-class TitleBarOnDestinationChangedListener(titleBar: TitleBar, configuration: AppBarConfiguration)
-    : OnDestinationChangedListener {
+class TitleBarOnDestinationChangedListener(titleBar: TitleBar, configuration: AppBarConfiguration) :
+    OnDestinationChangedListener {
     private val mContext = titleBar.context
     private val mTitleBarWeakReference: WeakReference<TitleBar> = WeakReference(titleBar)
     private val mTopLevelDestinations = configuration.topLevelDestinations
-    private val mOpenableLayoutWeakReference: WeakReference<Openable>? =
-            if (configuration.openableLayout != null) {
-                WeakReference(configuration.openableLayout)
-            } else {
-                null
-            }
+    private val mOpenableLayoutWeakReference = configuration.openableLayout?.run {
+        WeakReference(this)
+    }
 
     private var mArrowDrawable: DrawerArrowDrawable? = null
     private var mAnimator: ValueAnimator? = null
 
-    override fun onDestinationChanged(controller: NavController,
-                                      destination: NavDestination, arguments: Bundle?) {
+    override fun onDestinationChanged(
+        controller: NavController,
+        destination: NavDestination, arguments: Bundle?
+    ) {
         if (mTitleBarWeakReference.get() == null) {
             controller.removeOnDestinationChangedListener(this)
         }
@@ -67,8 +65,10 @@ class TitleBarOnDestinationChangedListener(titleBar: TitleBar, configuration: Ap
                     matcher.appendReplacement(title, "")
                     title.append(arguments[argName].toString())
                 } else {
-                    throw IllegalArgumentException("Could not find " + argName + " in "
-                            + arguments + " to fill label " + label)
+                    throw IllegalArgumentException(
+                        "Could not find " + argName + " in "
+                                + arguments + " to fill label " + label
+                    )
                 }
             }
             matcher.appendTail(title)
@@ -94,7 +94,10 @@ class TitleBarOnDestinationChangedListener(titleBar: TitleBar, configuration: Ap
             // We're setting the initial state, so skip the animation
             animate = false
         }
-        setNavigationIcon(mArrowDrawable, if (showAsDrawerIndicator) "open_drawer" else "navigate_up")
+        setNavigationIcon(
+            mArrowDrawable,
+            if (showAsDrawerIndicator) "open_drawer" else "navigate_up"
+        )
         val endValue = if (showAsDrawerIndicator) 0f else 1f
         if (animate) {
             val startValue = mArrowDrawable!!.progress
@@ -123,7 +126,10 @@ class TitleBarOnDestinationChangedListener(titleBar: TitleBar, configuration: Ap
         }
     }
 
-    private fun matchDestinations(destination: NavDestination, topLevelDestinations: Set<Int>): Boolean {
+    private fun matchDestinations(
+        destination: NavDestination,
+        topLevelDestinations: Set<Int>
+    ): Boolean {
         var currentDestination: NavDestination? = destination
         do {
             if (topLevelDestinations.contains(currentDestination!!.id)) {

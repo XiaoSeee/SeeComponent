@@ -3,12 +3,14 @@ package com.see.mvvm.navigation
 import android.os.Bundle
 import android.os.PersistableBundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.NavController
 import androidx.navigation.NavDestination
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI
 import com.see.mvvm.R
+import com.see.mvvm.listener.OnCallListener
 import com.see.mvvm.widget.TitleBar
 
 /**
@@ -42,29 +44,39 @@ abstract class SeeContainerActivity : AppCompatActivity(), OnCallListener {
 
     private fun initNavigation(config: NavConfig) {
         if (config.hostFragment.endsWith("NavHostFragment")) {
-            val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
+            val navHostFragment =
+                supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
             navController = navHostFragment.navController
             // 获取 navGraph
             val navGraph = navController.navInflater.inflate(config.graphResId)
             if (config.startDestId != 0) {
-                navGraph.startDestination = config.startDestId
+                navGraph.setStartDestination(config.startDestId)
             }
             // 设置 TitleBar 事件
-            mTitleBar?.let {
+            mTitleBar?.let { titleBar ->
                 val builder = if (isTopLevel()) {
                     AppBarConfiguration.Builder(navGraph.startDestination)
                 } else {
                     AppBarConfiguration.Builder()
                 }
 
+                builder.setOpenableLayout(getDrawerLayout())
+
                 val appBarConfiguration = builder.setFallbackOnNavigateUpListener {
                     onBackPressed()
                     true
                 }.build()
 
-                navController.addOnDestinationChangedListener(TitleBarOnDestinationChangedListener(it, appBarConfiguration))
-                it.setNavigationOnClickListener {
-                    NavigationUI.navigateUp(navController, appBarConfiguration)
+                navController.addOnDestinationChangedListener(
+                    TitleBarOnDestinationChangedListener(titleBar, appBarConfiguration)
+                )
+
+                titleBar.setNavigationOnClickListener {
+                    if (onBackPressedDispatcher.hasEnabledCallbacks()) {
+                        onBackPressedDispatcher.onBackPressed()
+                    } else {
+                        NavigationUI.navigateUp(navController, appBarConfiguration)
+                    }
                 }
             }
             // 设置全局监听
@@ -95,11 +107,15 @@ abstract class SeeContainerActivity : AppCompatActivity(), OnCallListener {
         return false
     }
 
+    open fun getDrawerLayout(): DrawerLayout? {
+        return null
+    }
+
     open fun onDestinationChanged(controller: NavController, dest: NavDestination, args: Bundle?) {
 
     }
 
-    override fun callOnActivity(what: Int, args: Bundle?) {
+    override fun callOnActivity(what: Int, args: Bundle) {
 
     }
 }

@@ -2,4 +2,6 @@
 <resources>
 
     <style name="ToolbarTheme" parent="ThemeOverlay.AppCompat.Dark" />
+
+    <dimen name="top_bar_title_size">20sp</dimen>
 </resources>

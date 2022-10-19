@@ -15,3 +15,11 @@ inline fun <X, Y> LiveData<X>.mapToMutable(crossinline function: (X) -> Y): Muta
         }
     }
 }
+
+inline fun <X, Y> LiveData<X>.mapToUnPeek(crossinline function: (X) -> Y): UnPeekLiveData<Y> {
+    return UnPeekLiveData<Y>().apply {
+        this@mapToUnPeek.observeForever {
+            value = function(it)
+        }
+    }
+}

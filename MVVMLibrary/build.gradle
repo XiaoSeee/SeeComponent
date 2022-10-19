@@ -6,7 +6,7 @@ plugins {
 
 ext {
     PUBLISH_GROUP_ID = 'io.github.xiaoseee'
-    PUBLISH_VERSION = '0.1.0'
+    PUBLISH_VERSION = '0.2.0'
     PUBLISH_ARTIFACT_ID = 'mvvm'
 }
 apply from: '../scripts/publish-mavencentral.gradle'
