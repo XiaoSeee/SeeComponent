@@ -85,4 +85,8 @@ abstract class SeeBindingDialog : DialogFragment() {
     fun <T : View> findViewById(@IdRes id: Int): T {
         return mRootView.findViewById(id)
     }
+
+    fun setClickById(@IdRes id: Int, listener: View.OnClickListener) {
+        findViewById<View>(id).setOnClickListener(listener)
+    }
 }

@@ -131,6 +131,10 @@ abstract class SeeBindingFragment : Fragment() {
         return mRootView.findViewById(id)
     }
 
+    fun setClickById(@IdRes id: Int, listener: View.OnClickListener) {
+        findViewById<View>(id).setOnClickListener(listener)
+    }
+
     fun callOnActivity(what: Int, args: Bundle = Bundle()) {
         mCallListener?.callOnActivity(what, args)
     }

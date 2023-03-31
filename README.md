@@ -11,6 +11,6 @@ implementation 'io.github.xiaoseee:mvp:1.1.0'
 ### mvvm
 
 ```groovy
-implementation 'io.github.xiaoseee:mvvm:0.2.0'
+implementation 'io.github.xiaoseee:mvvm:0.3.0'
 ```
 

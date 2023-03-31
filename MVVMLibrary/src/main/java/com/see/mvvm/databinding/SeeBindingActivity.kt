@@ -2,6 +2,8 @@ package com.see.mvvm.databinding
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.view.View
+import androidx.annotation.IdRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.util.isEmpty
 import androidx.databinding.DataBindingUtil
@@ -97,5 +99,9 @@ abstract class SeeBindingActivity : AppCompatActivity() {
      */
     open fun isTopLevel(): Boolean {
         return false
+    }
+
+    fun setClickById(@IdRes id: Int, listener: View.OnClickListener) {
+        findViewById<View>(id).setOnClickListener(listener)
     }
 }
